@@ -57,7 +57,7 @@ const logIn = async (req, res) => {
         { user_id: user.Userid, email },
         authConfig.secret,
         {
-          expiresIn: "2h",
+          expiresIn: authConfig.expires,
         }
       );
 

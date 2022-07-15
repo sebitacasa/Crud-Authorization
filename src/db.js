@@ -54,12 +54,16 @@ Genre.belongsToMany(Movie, { through: "movie_genre" });
 //muchas peliculas pueden pertenecer a muchos generos
 //muchos generos puden pertenecer a muchas peliculas
 
+Movie.belongsToMany(Character, { through: "movie_character" });
+Character.belongsToMany(Movie, { through: "movie_character" });
+
+
 User.hasMany(Movie)
 Movie.belongsTo(User)
 
 
-Movie.hasMany(Character);
-Character.belongsTo(Movie);
+// Movie.hasMany(Character);
+// Character.belongsTo(Movie);
 
 
 

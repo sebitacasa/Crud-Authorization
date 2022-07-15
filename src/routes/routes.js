@@ -1,13 +1,15 @@
 const uploadGenres = require('../controller/genre')
-const {postMovie, getMovie} = require('../controller/index')
+const {postMovie, getMovie, getCharacter} = require('../controller/index')
 const {registrer, logIn} = require('../controller/Auth')
 const express = require('express')
 const router = express.Router()
 const verifyToken = require("../middleware/auth")
 
+///////////////////////////////////////////////
 
 router.route('/genres').get(uploadGenres)
 router.route('/movies').get(verifyToken,getMovie)
+router.route('/character').get(getCharacter)
 router.route('/postMovie').post(verifyToken,postMovie)
 
 

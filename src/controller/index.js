@@ -1,5 +1,5 @@
 const { Character, Genre, Movie } = require("../db");
-const verifyToken = require("../middleware/auth");
+
 
 const getMovie = async (req, res) => {
   try {
@@ -29,22 +29,26 @@ const getMovie = async (req, res) => {
 const postMovie = async (req, res) => {
   try {
     const { title, image, releaseDate, genre, character } = req.body;
+   
 
-    const charc = Character.build(character);
-
-    await charc.save();
-
-    let movies = { title, image, releaseDate };
     let movie = await Movie.create({
-      ...movies,
+      title,
+      image,
+      releaseDate,
     });
 
     let addGenres = await Genre.findAll({ where: { name: genre } });
 
     await movie.addGenre(addGenres);
-    let addCharacter = await Character.findAll();
+    
+     await Character.findOrCreate({
+      where: { name: character.name },
+      defaults: character
+    });
 
-    await movie.addCharacter(addCharacter);
+    const charc = await Character.findAll()
+    await movie.addCharacter(charc);
+  
 
     return res.json({ msg: "pelicula creada", data: movie });
   } catch (error) {
@@ -52,7 +56,35 @@ const postMovie = async (req, res) => {
   }
 };
 
+/////////////////////////////////////////////////////////////////////////
+
+const getCharacter = async (req, res) => {
+
+  try {
+    let characterData = await Character.findAll()
+  const character = characterData.map(e => {
+    return {
+      name: e.name,
+      images: e.images
+    }
+  })
+
+  res.send(characterData)
+  } catch (error) {
+    return res.status(404).send("Ups something went wrong... try again")
+  }
+  
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+
+    
+   
+
 module.exports = {
   postMovie,
   getMovie,
+  getCharacter
 };

@@ -3,8 +3,7 @@ const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
 const routes = require('./routes/index')
-const { conn } = require('./db');
-const verifyToken = require('./middleware/auth')
+
 
 require('./db')
 
@@ -26,13 +25,7 @@ server.use((req, res, next) => {
 
   server.use('/', routes);
 
-  // server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
-  //   const status = err.status || 500;
-  //   const message = err.message || err;
-  //   console.error(err);
-  //   res.status(status).send(message);
-  // });
-  
+ 
   
  
 

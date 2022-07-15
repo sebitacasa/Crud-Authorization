@@ -11,22 +11,15 @@ const genres = [
 ]
 
 const uploadGenres = async (req, res) => {
-    try {
-        let gen = genres.map(e => {
-            return {name: e.name}
-        })
+    genres.forEach((e) => {
+        Genre.findOrCreate({
+          where: { name: e.name },
+        });
+      });
+    
+      const allGenres = await Genre.findAll();
+      res.send(allGenres);
+    };
 
-        const genreData = await Genre.findAll()
-
-        if(genreData.length){
-            return res.send(genreData)
-        } else {
-            const genresDb = await Genre.bulkCreate(gen)
-            return res.json(genresDb)
-        }
-    } catch (error) {
-        res.status(404).json("error")
-    }
-}
 
 module.exports = uploadGenres
