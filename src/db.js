@@ -1,5 +1,6 @@
 require("dotenv").config();
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
+
 const fs = require("fs");
 const path = require("path");
 //const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
@@ -54,9 +55,27 @@ Genre.belongsToMany(Movie, { through: "movie_genre" });
 //muchas peliculas pueden pertenecer a muchos generos
 //muchos generos puden pertenecer a muchas peliculas
 
-Movie.belongsToMany(Character, { through: "movie_character" });
-Character.belongsToMany(Movie, { through: "movie_character" });
 
+// const ActorMovies = (Sequelize) => { Sequelize.define('ActorMovies', {
+//   movieId: {
+//     type: DataTypes.INTEGER,
+//     references: {
+//       model: Movie, // 'Movies' would also work
+//       key: 'id'
+//     }
+//   },
+//   characterId: {
+//     type: DataTypes.INTEGER,
+//     references: {
+//       model: Character, // 'Actors' would also work
+//       key: 'id'
+//     }
+//   }
+// })
+// };
+
+Movie.belongsToMany(Character, { through: 'actor_movies' });
+Character.belongsToMany(Movie, { through: 'actor_movies' });
 
 User.hasMany(Movie)
 Movie.belongsTo(User)

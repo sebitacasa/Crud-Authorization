@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
 
     sequelize.define("user", {
 
-            Userid: {
+            userId: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             allowNull: false,

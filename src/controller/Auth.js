@@ -26,11 +26,6 @@ const registrer = async (req, res) => {
       password: encrypetedPassword,
     });
 
-    // let token = jwt.sign({ user_id: user.Userid, email }, authConfig.secret, {
-    //   expiresIn: "2h",
-    // });
-    
-    // user.token = token
 
     return res.status(200).json({ msg: "User created sucefully", data: user });
   } catch (error) {
@@ -54,7 +49,7 @@ const logIn = async (req, res) => {
     if (user && (await bcrypt.compare(password, user.password))) {
 
       let token = jwt.sign(
-        { user_id: user.Userid, email },
+        { user_id: user.userId, email },
         authConfig.secret,
         {
           expiresIn: authConfig.expires,
