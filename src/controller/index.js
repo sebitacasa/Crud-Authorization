@@ -1,5 +1,7 @@
 const { Character, Genre, Movie } = require("../db");
 
+                  //// Movies Section ////
+///////////////////////////////////////////////////////////////
 const getMovie = async (req, res) => {
   try {
     let movies = await Movie.findAll({
@@ -15,7 +17,6 @@ const getMovie = async (req, res) => {
         },
       ],
     });
-    console.log(movies);
 
     res.send(movies);
   } catch (error) {
@@ -23,7 +24,7 @@ const getMovie = async (req, res) => {
   }
 };
 
-/////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////
 
 const postMovie = async (req, res) => {
   try {
@@ -59,12 +60,51 @@ const postMovie = async (req, res) => {
     return res.status(404).json({ msg: "error" });
   }
 };
-//  await Character.findOrCreate({
-//   where: { name: character.map(e => e.name)},
-//   defaults: character.map(e => e)
-// });
 
+                   
 /////////////////////////////////////////////////////////////////////////
+
+const moviePut = async (req, res) => {
+  const { id } = req.params;
+  const { title, releaseDate, image, genres } = req.body;
+
+  try {
+    await Movie.update(
+      {
+        title,
+        releaseDate,
+        image,
+        genres,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    const movieUpdatealready = await Movie.findByPk(id);
+    return res.send(movieUpdatealready);
+  } catch (error) {
+    res.status(404).send("ups something went wrong");
+  }
+};
+
+//////////////////////////////////////////////////////////////////////////
+
+const deleteMovie = async (req, res) => {
+  const {id} = req.params
+  try {
+    await Movie.destroy({where: {id: id}})
+    res.status(204).send("character was deleted sucefully")
+  } catch (error) {
+    res.send(error)
+  }
+}
+
+
+
+                      ///Character Section///
+///////////////////////////////////////////////////////////////////////////
 
 const getCharacter = async (req, res) => {
   try {
@@ -84,8 +124,52 @@ const getCharacter = async (req, res) => {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+const characterPut = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+
+  try {
+    await Character.update(
+      {
+        name: req.body.name,
+        images: req.body.images,
+        weigth: req.body.weigth,
+        history: req.body.history,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    const characterUpdateAlready = await Character.findByPk(id);
+    return res.send(characterUpdateAlready);
+  } catch (error) {
+    res.status(404).send("ups something went wrong");
+  }
+};
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+const deleteCharacter = async (req, res) => {
+  const {id} = req.params
+  try {
+    await Character.destroy({where: {id}})
+    res.status(204).send("character was deleted sucefully")
+  } catch (error) {
+    res.send(error)
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
 module.exports = {
   postMovie,
   getMovie,
   getCharacter,
+  moviePut,
+  characterPut,
+  deleteCharacter,
+  deleteMovie
 };
