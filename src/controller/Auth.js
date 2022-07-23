@@ -2,7 +2,7 @@ const { User } = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const authConfig = require("../configAuth");
-
+const sendEmail = require("../middleware/email");
 
 const registrer = async (req, res) => {
   try {
@@ -26,7 +26,7 @@ const registrer = async (req, res) => {
       password: encrypetedPassword,
     });
 
-
+    sendEmail(email, name);
     return res.status(200).json({ msg: "User created sucefully", data: user });
   } catch (error) {
     res.status(404).send("Ups something went wrong, try again");
@@ -34,7 +34,6 @@ const registrer = async (req, res) => {
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-
 
 const logIn = async (req, res) => {
   try {
@@ -47,21 +46,15 @@ const logIn = async (req, res) => {
     const user = await User.findOne({ where: { email: email } });
 
     if (user && (await bcrypt.compare(password, user.password))) {
+      let token = jwt.sign({ user_id: user.userId, email }, authConfig.secret, {
+        expiresIn: authConfig.expires,
+      });
 
-      let token = jwt.sign(
-        { user_id: user.userId, email },
-        authConfig.secret,
-        {
-          expiresIn: authConfig.expires,
-        }
-      );
-
-      user.token = token
+      user.token = token;
     }
-    return res.status(200).json({user: user, })
-
+    return res.status(200).json({ user: user });
   } catch (error) {
-    res.status(404).send("Ups something happens")
+    res.status(404).send("Ups something happens");
   }
 };
 
@@ -70,11 +63,4 @@ const logIn = async (req, res) => {
 module.exports = {
   logIn,
   registrer,
-  
 };
-
-
-
-
-
-

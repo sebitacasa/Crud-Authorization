@@ -1,7 +1,9 @@
 const { Character, Genre, Movie } = require("../db");
+const { Sequelize } = require("sequelize");
 
-                  //// Movies Section ////
+//// Movies Section ////
 ///////////////////////////////////////////////////////////////
+
 const getMovie = async (req, res) => {
   try {
     let movies = await Movie.findAll({
@@ -25,6 +27,46 @@ const getMovie = async (req, res) => {
 };
 
 ///////////////////////////////////////////////////////////////////
+
+const filterMovie = async (req, res) => {
+  try {
+    const movieFilter = await Movie.findAll({
+      where: {
+        title: { [Sequelize.Op.iLike]: `%${req.query.title.toLowerCase()}%` },
+      },
+
+      include: [
+        {
+          model: Genre,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Character,
+          attributes: ["name", "images", "weigth", "age", "history"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+
+      order: [
+        ["title", "ASC"],
+        ["id", "DESC"],
+      ],
+    });
+
+    return res.send(movieFilter);
+  } catch (error) {
+    return res.status(404).send("ups something went wrong");
+  }
+};
+
+////////////////////////////////////////////////////////////////////
+
+
 
 const postMovie = async (req, res) => {
   try {
@@ -61,7 +103,6 @@ const postMovie = async (req, res) => {
   }
 };
 
-                   
 /////////////////////////////////////////////////////////////////////////
 
 const moviePut = async (req, res) => {
@@ -92,18 +133,16 @@ const moviePut = async (req, res) => {
 //////////////////////////////////////////////////////////////////////////
 
 const deleteMovie = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params;
   try {
-    await Movie.destroy({where: {id: id}})
-    res.status(204).send("character was deleted sucefully")
+    await Movie.destroy({ where: { id } });
+    res.status(204).send("character was deleted sucefully");
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
+};
 
-
-
-                      ///Character Section///
+///Character Section///
 ///////////////////////////////////////////////////////////////////////////
 
 const getCharacter = async (req, res) => {
@@ -151,16 +190,15 @@ const characterPut = async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////
 
-
 const deleteCharacter = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params;
   try {
-    await Character.destroy({where: {id}})
-    res.status(204).send("character was deleted sucefully")
+    await Character.destroy({ where: { id } });
+    res.status(204).send("character was deleted sucefully");
   } catch (error) {
-    res.send(error)
+    res.send(error);
   }
-}
+};
 
 //////////////////////////////////////////////////////////////////////////////
 
@@ -171,5 +209,7 @@ module.exports = {
   moviePut,
   characterPut,
   deleteCharacter,
-  deleteMovie
+  deleteMovie,
+  filterMovie,
+
 };
