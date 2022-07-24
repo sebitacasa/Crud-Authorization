@@ -3,10 +3,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
-//const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-const DB_USER = "postgres";
-const DB_PASSWORD = "38928467";
-const DB_HOST = "localhost";
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/movies`,

@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const genres = require('./routes') 
+const routes = require('./routes') 
 
-router.use('/alkemy', genres )
+router.use('/alkemy', routes )
 
 module.exports = router
