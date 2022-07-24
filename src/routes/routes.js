@@ -20,7 +20,7 @@ const verifyToken = require("../middleware/auth");
 
 ////////////////////////////////////////////////////////////////////////////
 
-router.route("/genres").get(uploadGenres);
+router.route("/genres").get(verifyToken,uploadGenres);
 router.route("/movies").get(verifyToken, getMovie);
 router.route("/character").get(verifyToken ,getCharacter);
 router.route("/postMovie").post(verifyToken, postMovie);

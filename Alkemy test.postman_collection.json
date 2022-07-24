@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "41d91e02-ba72-4269-91ca-f3e9fb0f6518",
+		"name": "Alkemy test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "registrer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "sebastian",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "seba.-14@hotmail.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "1422545s",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/alkemy/auth/registrer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"auth",
+						"registrer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTBlMjVmMzMtNGE0Ni00MjNmLTk2MjUtMTY5MzEzZDBjNzY5IiwiZW1haWwiOiJzZGFzZF80QGhvdG1haWwuY29tIiwiaWF0IjoxNjU3ODE5NDY0LCJleHAiOjE2NTc4MTk0NjR9.LVTtTfEdzL1nrGeQCGluFEoK4M-AUvno-Cr50aQ-Ot0\"",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "maria Agustina",
+							"type": "default",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "seba.-14@hotmail.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "1422545s",
+							"type": "default"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "default",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/alkemy/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crateMovies",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \" tarzan \",\r\n    \"image\": \"https://www.lacasadeel.net/2014/06/el-videoclub-la-trilogia-animada-de-tarzan-de-disney.html\",\r\n    \"releaseDate\": \"11-10-1995\",\r\n    \"genre\": [\"comedy\", \"drama\"],\r\n    \"character\": [\r\n        {\r\n        \"name\": \"tarzan man\",\r\n        \"images\": \"https://www.lacasadeel.net/2014/06/el-videoclub-la-trilogia-animada-de-tarzan-de-disney.html\",\r\n        \"age\": \"55\",\r\n        \"weigth\": \"85\",\r\n        \"history\": \"Tarzan is a fictional character, an archetypal feral child raised in the African jungle by the Mangani great apes; he later experiences civilization, only to reject it and return to the wild as a heroic adventurer.\"\r\n    },\r\n    {\r\n        \"name\": \"mono \",\r\n        \"images\": \"https://www.lacasadeel.net/2014/06/el-videoclub-la-trilogia-animada-de-tarzan-de-disney.html\",\r\n        \"age\": \"55\",\r\n        \"weigth\": \"85\",\r\n        \"history\": \"Tarzan is a fictional character, an archetypal feral child raised in the African jungle by the Mangani great apes; he later experiences civilization, only to reject it and return to the wild as a heroic adventurer.\"\r\n    },\r\n    {\r\n        \"name\": \"leon \",\r\n        \"images\": \"https://www.lacasadeel.net/2014/06/el-videoclub-la-trilogia-animada-de-tarzan-de-disney.html\",\r\n        \"age\": \"55\",\r\n        \"weigth\": \"85\",\r\n        \"history\": \"Tarzan is a fictional character, an archetypal feral child raised in the African jungle by the Mangani great apes; he later experiences civilization, only to reject it and return to the wild as a heroic adventurer.\"\r\n    }\r\n\r\n    ],\r\n\r\n        \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjJmZDllYWQtNzczZC00ZDFmLTllNzMtNzU2NjYxZTQyMWJiIiwiZW1haWwiOiJzZWJhLi0xNEBob3RtYWlsLmNvbSIsImlhdCI6MTY1ODU5NDEwMywiZXhwIjoxNjU4NjAxMzAzfQ.fa49wQZZUoO0Rt1E5xc5EW9EUQbYgQRsnVlolFRznxw\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/alkemy/postMovie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"postMovie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getGenres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/alkemy/genres",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"genres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getMovies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-access-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjJmZDllYWQtNzczZC00ZDFmLTllNzMtNzU2NjYxZTQyMWJiIiwiZW1haWwiOiJzZWJhLi0xNEBob3RtYWlsLmNvbSIsImlhdCI6MTY1ODU5NDEwMywiZXhwIjoxNjU4NjAxMzAzfQ.fa49wQZZUoO0Rt1E5xc5EW9EUQbYgQRsnVlolFRznxw",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Authorization\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZDNjNzY1ODEtNmY4OC00NjM1LWI5OGItMzljYWRlOWFlMGRjIiwiZW1haWwiOiJzZGFzZGFzZF80QGhvdG1haWwuY29tIiwiaWF0IjoxNjU3ODI5OTU3LCJleHAiOjE2NTc4Mjk5NTd9.fWoRYiEYEc1bHlU5jyLwoaIlzGKKuoLc_gjxURaRkZM\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/alkemy/movies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"movies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get characters",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "update movie",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"  tarzan \"\r\n}\r\n\r\n        \r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/alkemy/movieUpdate/9f7ca02f-8e62-45bc-ae73-ce43f30059a0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"movieUpdate",
+						"9f7ca02f-8e62-45bc-ae73-ce43f30059a0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update character",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/alkemy/characterUpdate/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"characterUpdate",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getByTitle",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "delelte movie",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/alkemy/deleteCharacter/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"deleteCharacter",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete character",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/alkemy/deleteCharacter/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"alkemy",
+						"deleteCharacter",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

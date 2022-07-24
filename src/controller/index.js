@@ -1,7 +1,7 @@
 const { Character, Genre, Movie } = require("../db");
 const { Sequelize } = require("sequelize");
 
-//// Movies Section ////
+                  //// Movies Section ////
 ///////////////////////////////////////////////////////////////
 
 const getMovie = async (req, res) => {
@@ -74,10 +74,10 @@ const postMovie = async (req, res) => {
 
     let movie = await Movie.create({
       title: req.body.title,
-
       image: req.body.image,
       releaseDate: req.body.releaseDate,
     });
+
 
     character.map((answer) => {
       Character.findOrCreate({
@@ -134,15 +134,21 @@ const moviePut = async (req, res) => {
 
 const deleteMovie = async (req, res) => {
   const { id } = req.params;
-  try {
-    await Movie.destroy({ where: { id } });
-    res.status(204).send("character was deleted sucefully");
-  } catch (error) {
-    res.send(error);
-  }
+  Movie.destroy({
+    where: {
+       id
+    }
+ }).then(function(rowDeleted){ 
+   if(rowDeleted === 1){
+      res.send("movie deleted")
+    }
+ }, function(err){
+     console.log(err); 
+ });
 };
 
-///Character Section///
+
+                            ///Character Section///
 ///////////////////////////////////////////////////////////////////////////
 
 const getCharacter = async (req, res) => {
@@ -192,12 +198,25 @@ const characterPut = async (req, res) => {
 
 const deleteCharacter = async (req, res) => {
   const { id } = req.params;
-  try {
-    await Character.destroy({ where: { id } });
-    res.status(204).send("character was deleted sucefully");
-  } catch (error) {
-    res.send(error);
-  }
+  // try {
+  //   await Character.destroy({ where: { id } });
+  //   res.status(204).send("character was deleted sucefully");
+  // } catch (error) {
+  //   res.send(error);
+  // }
+
+  
+  Character.destroy({
+    where: {
+       id
+    }
+ }).then(function(rowDeleted){ 
+   if(rowDeleted === 1){
+      res.send("character deleted")
+    }
+ }, function(err){
+     console.log(err); 
+ });
 };
 
 //////////////////////////////////////////////////////////////////////////////
